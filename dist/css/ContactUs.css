@@ -1,0 +1,46 @@
+.img-fluid {
+  width: 100%;
+  height: auto;
+}
+
+.content .contact {
+  background: #708090;
+  color: white;
+}
+
+.content .contact .image {
+  padding: 0;
+}
+
+.content .contact .text {
+  padding: 50px;
+}
+
+.content .contact .head {
+  margin-bottom: 20px;
+}
+
+.content .contact .text .body .text {
+  padding: 0px;
+  margin: 0px;
+  font-size: 18px;
+}
+
+
+.content .contact .text .body .text p {
+  padding: 0px;
+  margin: 0px;
+  
+}
+
+.content .contact .text .body .info {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.content .contact .text .body .info i {
+  padding-top: 4px;
+  font-size: 18px;
+}
