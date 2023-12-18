@@ -1,6 +1,19 @@
+<style>
+        body {
+            background-image: url('images/banner2.png'); 
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Add additional styles as needed */
+    </style>
+
+
 <?php
-	use PHPMailer\PHPMailer\PHPMailer;
-	use PHPMailer\PHPMailer\Exception;
 
 	include 'includes/session.php';
 
@@ -14,22 +27,6 @@
 		$_SESSION['firstname'] = $firstname;
 		$_SESSION['lastname'] = $lastname;
 		$_SESSION['email'] = $email;
-
-		if(!isset($_SESSION['captcha'])){
-			require('recaptcha/src/autoload.php');		
-			$recaptcha = new \ReCaptcha\ReCaptcha('6LevO1IUAAAAAFCCiOHERRXjh3VrHa5oywciMKcw', new \ReCaptcha\RequestMethod\SocketPost());
-			$resp = $recaptcha->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
-
-			if (!$resp->isSuccess()){
-		  		$_SESSION['error'] = 'Please answer recaptcha correctly';
-		  		header('location: signup.php');	
-		  		exit();	
-		  	}	
-		  	else{
-		  		$_SESSION['captcha'] = time() + (10*60);
-		  	}
-
-		}
 
 		if($password != $repassword){
 			$_SESSION['error'] = 'Passwords did not match';
@@ -67,53 +64,6 @@
 						<a href='http://localhost/ecommerce/activate.php?code=".$code."&user=".$userid."'>Activate Account</a>
 					";
 
-					//Load phpmailer
-		    		require 'vendor/autoload.php';
-
-		    		$mail = new PHPMailer(true);                             
-				    try {
-				        //Server settings
-				        $mail->isSMTP();                                     
-				        $mail->Host = 'smtp.gmail.com';                      
-				        $mail->SMTPAuth = true;                               
-				        $mail->Username = 'testsourcecodester@gmail.com';     
-				        $mail->Password = 'mysourcepass';                    
-				        $mail->SMTPOptions = array(
-				            'ssl' => array(
-				            'verify_peer' => false,
-				            'verify_peer_name' => false,
-				            'allow_self_signed' => true
-				            )
-				        );                         
-				        $mail->SMTPSecure = 'ssl';                           
-				        $mail->Port = 465;                                   
-
-				        $mail->setFrom('testsourcecodester@gmail.com');
-				        
-				        //Recipients
-				        $mail->addAddress($email);              
-				        $mail->addReplyTo('testsourcecodester@gmail.com');
-				       
-				        //Content
-				        $mail->isHTML(true);                                  
-				        $mail->Subject = 'ECommerce Site Sign Up';
-				        $mail->Body    = $message;
-
-				        $mail->send();
-
-				        unset($_SESSION['firstname']);
-				        unset($_SESSION['lastname']);
-				        unset($_SESSION['email']);
-
-				        $_SESSION['success'] = 'Account created. Check your email to activate.';
-				        header('location: signup.php');
-
-				    } 
-				    catch (Exception $e) {
-				        $_SESSION['error'] = 'Message could not be sent. Mailer Error: '.$mail->ErrorInfo;
-				        header('location: signup.php');
-				    }
-
 
 				}
 				catch(PDOException $e){
@@ -134,3 +84,33 @@
 	}
 
 ?>
+
+<html>
+<head>
+    <title>Pop-up Notification Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+<?php
+// Your PHP code here to determine when to show the pop-up
+$showPopup = true; // Replace this condition with your own logic
+
+if ($showPopup) {
+    echo '<script>';
+    echo 'Swal.fire({
+                title: "Thank you for Registering! Please wait for account approval",
+                icon: "success",
+                showCancelButton: false,
+                confirmButtonText: "OK"
+            }).then(function() {
+                window.location.href = "index.php";
+            });';
+    echo '</script>';
+}
+?>
+
+<!-- The rest of your HTML content -->
+
+</body>
+</html>

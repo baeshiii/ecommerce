@@ -17,7 +17,7 @@
 
 	  			$pdo->close();
 	  		?>
-	    	<ul>
+	    	</ul>
 	  	</div>
 	</div>
 </div>
@@ -47,9 +47,16 @@
 	    	<h3 class='box-title'><b>Follow us on Social Media</b></h3>
 	  	</div>
 	  	<div class='box-body'>
-	    	<a class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook"></i></a>
-	    	<a class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter"></i></a>
-	    	<a class="btn btn-social-icon btn-instagram"><i class="fa fa-instagram"></i></a>
-	  	</div>
+			<a class="btn btn-social-icon btn-facebook" onclick="redirectToRandom(['https://www.facebook.com/jhonandre.maleniza/', 'https://www.facebook.com/zuxxxxx', 'https://www.facebook.com/nicopalamo', 'https://www.facebook.com/theoloseanon.cinco.5', 'https://www.facebook.com/wayne.eblamo', 'https://www.facebook.com/profile.php?id=61554885265150'])"><i class="fa fa-facebook"></i></a>
+			<a class="btn btn-social-icon btn-twitter" onclick="redirectToRandom(['https://twitter.com'])"><i class="fa fa-twitter"></i></a>
+			<a class="btn btn-social-icon btn-instagram" onclick="redirectToRandom(['https://www.instagram.com/_itsnot_jhonny/'])"><i class="fa fa-instagram"></i></a>
+		</div>
+
+	<script>
+		function redirectToRandom(urls) {
+			const randomIndex = Math.floor(Math.random() * urls.length);
+			window.location.href = urls[randomIndex];
+		}
+	</script>
 	</div>
 </div>
